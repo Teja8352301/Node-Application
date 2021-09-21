@@ -1,0 +1,25 @@
+<%- include('../includes/Header.ejs') %>
+<%- include('../includes/Materialize.ejs') %>
+<%- include('../includes/Navbar.ejs',{logged:logged}) %>
+<div class="d-flex justify-content-around">
+    <div class="card text-center text-primary border border-primary m-5">
+      <div class="card-header  border-primary">
+        <h3 style="font-weight: 600;"><%= title %></h3>
+      </div>
+      <div class="card-body">
+        <img style="width: 100%;"  src="<%= imageUrl%>" alt="Book">
+        <div style="height: 30%;">
+          <h4 class="text-light" style="font-weight: 600;">Price : $ <%= price %></h4>
+          <h4 style="font-weight: 600;"><%= description %></h4>
+      </div>
+      </div>
+      <div class="card-footer text-muted d-flex justify-content-around border-primary" style="height: 15%;">
+       <!-- <div class="col"> -->
+        <%- include('../includes/AddtoCart.ejs',{productId:id}) %>
+         <!-- <a class="btn btn-primary text-white" href="/details">Details</a> -->
+       <!-- </div> -->
+      </div>
+    </div>
+  </div>
+  
+  <%- include('../includes/Footer.ejs') %>

@@ -1,0 +1,44 @@
+<%- include('../includes/Header.ejs') %>
+<%- include('../includes/Materialize.ejs') %>
+<%- include('../includes/Navbar.ejs',{logged:logged}) %>
+<form class="m-3 d-flex flex-column align-items-center" action="/admin/postAddProduct" method="POST">
+  <% if(type==='edit') { %> 
+    <div class="form-group col-lg-6">
+      <label for="title"  style="font-weight: 500;">Title</label>
+      <input type="text"  style="font-weight: 500;" class="form-control" id="title" placeholder="title" name="title" value="<%= data[0].title %>">
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="imageUrl"  style="font-weight: 500;">ImageURL</label>
+      <input type="text"  style="font-weight: 500;" class="form-control" id="imageUrl" placeholder="imageUrl" name="imageUrl" value="<%= data[0].imageUrl %>">
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="price"  style="font-weight: 500;">Price</label>
+      <input type="text"  style="font-weight: 500;" class="form-control" id="price" placeholder="price" name="price" value="<%= data[0].price %>">
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="description"  style="font-weight: 500;">Description</label>
+      <input type="text"  style="font-weight: 500;" class="form-control" id="description" placeholder="description" name="description" value="<%= data[0].description %>">
+    </div>
+    <input type="text"  value="<%= data[0].id %>" name="productId" hidden/>
+    <button type="submit"  style="font-weight: 500;" class="btn btn-primary col-lg-6">Submit</button>
+    <%} else { %>
+      <div class="form-group col-lg-6">
+        <label  style="font-weight: 500;" for="title">Title</label>
+        <input  style="font-weight: 500;" type="text" class="form-control" id="title" placeholder="title" name="title">
+      </div>
+      <div class="form-group col-lg-6">
+        <label  style="font-weight: 500;" for="imageUrl">ImageURL</label>
+        <input  style="font-weight: 500;" type="text" class="form-control" id="imageUrl" placeholder="imageUrl" name="imageUrl">
+      </div>
+      <div class="form-group col-lg-6">
+        <label  style="font-weight: 500;" for="price">Price</label>
+        <input  style="font-weight: 500;" type="text" class="form-control" id="price" placeholder="price" name="price">
+      </div>
+      <div class="form-group col-lg-6">
+        <label  style="font-weight: 500;" for="description">Description</label>
+        <input  style="font-weight: 500;" type="text" class="form-control" id="description" placeholder="description" name="description">
+      </div>
+      <button  style="font-weight: 500;" type="submit" class="btn btn-primary col-lg-6">Submit</button>
+      <%}%>
+  </form>
+  <%- include('../includes/Footer.ejs') %>

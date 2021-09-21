@@ -1,0 +1,19 @@
+<%- include('../includes/Header.ejs') %>
+<%- include('../includes/Materialize.ejs') %>
+<%- include('../includes/Navbar.ejs',{logged:logged}) %>
+
+<form class="m-3 d-flex flex-column align-items-center" action="/checkOTP" method="POST">
+    <% if(invalidMsg){ %>
+    <p class="list-group-item col-lg-6 bg-light text-danger  col-sm-12 m-3" style="font-weight: 500;"><%= invalidMsg %></p>
+    <%} %>
+    <p class="list-group-item col-lg-6 bg-light text-danger  col-sm-12 m-3" style="font-weight: 500;">OTP is Sent to this mail-<%= email %>:</p>
+    <div class="form-group col-lg-6">
+        <label for="email" style="font-weight: 500;">Enter the OTP</label>
+        <input type="text" name="id" value="<%= id %>" hidden>
+        <input style="font-weight: 500;" type="number" class="form-control" id="number" placeholder="OTP" name="otp">
+      </div>
+      <button type="submit" class="btn btn-primary col-lg-6" style="font-weight: 500;">Submit</button>
+</form>
+
+
+<%- include('../includes/Footer.ejs') %>

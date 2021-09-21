@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#submitAlign{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.loader{
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #0884d6;
+    height: 60px;
+    width: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin{
+    0%{transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  position: relative;
+ 
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<h2 style="background-color:DodgerBlue;text-align: center;">Data Converter Tool</h2>
+
+<div class="container">
+  <form action="/shop" method="POST" id="form">
+  <div class="row">
+    <div class="col-25">
+      <label for="sf">Source File Path:</label>
+    </div>
+    <div class="col-75">
+      <input type="file" id="sf" name="sf" placeholder="Place  File Name with Complete Path">
+    </div>
+    <input type="text" hidden value="" id="filepath"/>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="df">Dimension File Path:</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="df" name="df" placeholder="Place Dimension Folder Path">
+    </div>
+  </div>
+   <div class="row">
+    <div class="col-25">
+      <label for="of">Output File Path:</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="of" name="of" placeholder="Place Output Folder Path">
+    </div>
+  </div>
+  <div class="row" id="submitAlign">
+    <input type="submit" value="Submit" id="submit">
+  </div>
+  <div class="row my-3">
+    <button class="btn btn-primary text-white mx-1" >Add the Fields
+    </button>
+    <span id="addFields" class="btn btn-primary"><i class="fa fa-plus" style="font-size:14px"></i></span>
+</div>
+  </form>
+  
+</div>
+<script>
+    var fieldsAdd = document.querySelector('#addFields');
+    const fieldsData = document.querySelector('#form');
+    const submit = document.querySelector('#submit')
+    const fileRead = document.querySelector('#sf')
+    const filePath = document.querySelector('#filepath')
+        fileRead.addEventListener('change',(e)=>{
+            filePath.value = e.target.value
+        })
+        console.log(fieldsAdd)
+        let value = 0;
+        fieldsAdd.addEventListener('click',(e)=>{
+            let listField = document.createElement('div')
+            listField.classList.add('my-1')
+            listField.id = 'columnField'
+            value = value+1
+            listField.innerHTML = ` <div class="d-flex row col-12">
+                <div class="col-5 d-flex justify-content-around">
+                  <label for="df">Name:${value}</label>
+                  <input type="text" id="df" name=Name${value}: placeholder="Place dynamic column name" required>
+                </div>
+                <div class="col-5 d-flex justify-content-around">
+                  <label for="df">Value:${value}</label>
+                  <input type="text" id="df" name=Value${value}: placeholder="Place dynamic column value" required>
+                </div>
+                <button class="btn btn-danger" style="font-weight:500" id='columnDelete' onclick="myFunction(this)">Delete</button>
+            </div>`
+            fieldsData.appendChild(listField)
+        })
+
+        function myFunction(e) {
+            e.closest('#columnField').remove()
+          }
+        
+        fieldsData.addEventListener('submit',(e)=>{
+            let loader = document.createElement('div');
+            loader.classList.add('loader')
+            loader.innerHTML = ''
+            console.log(loader)
+            fieldsData.appendChild(loader)
+        })
+</script>
+</body>
+</html>
