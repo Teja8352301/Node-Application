@@ -22,6 +22,7 @@ const OrderItemModel = require('./model/orderItemModal')
 const OrderModel = require('./model/orderModal')
 const sessionStore = require('./utils/sessionStore');
 const Otp = require('./model/otpBehaviour');
+const dotEnv = require('dotenv').config({path:path.join(rootPath,'config','.env')})
 
 
 app.set('view engine', 'ejs');
